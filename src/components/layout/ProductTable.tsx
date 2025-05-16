@@ -50,11 +50,11 @@ export default function ProductTable({ products, AIConclusion, AIRecommend }: Pr
             </div>
 
             {/* Conditional rendering */}
-            <ProductComparisonTable products={products} />
-            {/* {showSummary
+            {/* <ProductComparisonTable products={products} /> */}
+            {showSummary
                 ? <AISummary AIConclusion={AIConclusion} AIRecommend={AIRecommend} />
                 : <ProductComparisonTable products={products} />
-            } */}
+            }
         </div>
     );
 }
