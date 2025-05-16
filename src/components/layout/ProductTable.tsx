@@ -40,13 +40,13 @@ export default function ProductTable({ products, AIConclusion, AIRecommend }: Pr
                     onClick={handleClick}
                 />
 
-                <button
+                {/* <button
                     onClick={handleCopy}
                     className="flex items-center gap-2 px-3 py-2 rounded-md text-sm textbox"
                 >
                     <Copy size={16} />
                     {copied ? 'Copied!' : 'Copy Link'}
-                </button>
+                </button> */}
             </div>
 
             {/* Conditional rendering */}
