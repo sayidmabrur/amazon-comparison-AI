@@ -50,8 +50,8 @@ export default function Footer() {
                         <h3 className="font-bold mb-3">Company</h3>
                         <ul className="space-y-2">
                             <li><a href="#" className="hover:text-blue-600">Home</a></li>
-                            <li><a href="#" className="hover:text-blue-600">Pro Features</a></li>
-                            <li><a href="#" className="hover:text-blue-600">Our Company</a></li>
+                            {/* <li><a href="#" className="hover:text-blue-600">Pro Features</a></li>
+                            <li><a href="#" className="hover:text-blue-600">Our Company</a></li> */}
                         </ul>
                     </div>
 
