@@ -261,4 +261,22 @@
   .footer {
     background-color: var(--footer-bg);
   }
+
+  /* Base style (light mode) */
+  .swiper-pagination-bullet {
+    background-color: #ccc;
+    opacity: 1;
+  }
+
+  /* Active bullet */
+  .swiper-pagination-bullet-active {
+    background-color: #f97316;
+    /* orange-500 or any preferred color */
+  }
+
+  /* Dark mode override */
+  .dark .swiper-pagination-bullet {
+    background-color: #929292 !important;
+    /* gray in dark mode */
+  }
 }
