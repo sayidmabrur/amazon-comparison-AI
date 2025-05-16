@@ -1,0 +1,10 @@
+/* swiper-custom.css */
+.product-slide {
+  width: 320px;
+  transition: transform 0.3s ease-in-out;
+  transform: scale(0.9);
+}
+
+.swiper-slide-active {
+  transform: scale(1);
+}

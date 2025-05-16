@@ -1,0 +1,243 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Theme Variables */
+:root {
+  --bg: #F8FAF7;
+  --text: #000000;
+  --h1-text: #346450;
+  --subtext: #313131;
+  --border: #000000;
+  --navbar: #FFFDFF;
+  --text-navbar: #0F1626;
+  --compare-button: transparent;
+  --compare-button-hover: #0d1d47;
+  --compare-button-hover-text: #EFEFEF;
+  --compare-button-text: #0d1d47;
+  --card: #ffffffef;
+  --text-card: #000000ef;
+  --bg-card: #ffffff;
+  --bg-card-hover: #d6d4d4d8;
+
+  /* Custom Colors */
+  --custom-h1-text: #346450;
+  --custom-compare-button: #F46C52;
+  --custom-add-product: transparent;
+  --custom-add-product-hover: #346450;
+  --custom-add-product-text-hover: #ffffff;
+  --custom-add-product-text: #346450;
+  --custom-add-product-border: #346450;
+  --custom-compare-button-text: #ffffff;
+  --custom-delete-text: #F56565;
+  /* Light Mode Red Color */
+  --custom-delete-text-hover: #4a4cec;
+  /* Light Mode Hover Red Color */
+
+}
+
+.dark {
+  --bg: #393E46;
+  --text: #e5e7eb;
+  --h1-text: #c7c7c7;
+  --subtext: #e5e7eb;
+  --navbar: #393E46;
+  --text-navbar: #fcfcfc;
+  --border: #000000;
+  --compare-button: #0d1d47;
+  --compare-button-hover: #0d1d47;
+  --compare-button-hover-text: #eeeeee;
+  --compare-button-text: #e0e0e0;
+  --card: #f3efef;
+  --text-card: #000000ef;
+  --bg-card: #757575;
+  --bg-card-hover: #b4b2b2;
+
+  --custom-h1-text: #d9e785;
+  --custom-compare-button: #0d1d47;
+  --custom-add-product: #DFD0B8;
+  --custom-add-product-border: #2D3748;
+  --custom-add-product-text: #2D3748;
+  --custom-compare-button-text: #ffffff;
+  --custom-delete-text: #d4ff17;
+  /* Dark Mode Red Color */
+  --custom-delete-text-hover: #11ce2b;
+  /* Dark Mode Hover Red Color */
+
+}
+
+/* Base Styles */
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+}
+
+/* Component Styles */
+@layer components {
+  .card {
+    @apply p-6 rounded-xl shadow-md transition-shadow duration-300;
+    background-color: var(--card);
+    color: var(--text-card);
+  }
+
+  .comparison-button {
+    @apply px-6 py-3 font-semibold rounded-xl transition duration-300 ease-in-out border focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background-color: var(--compare-button);
+    color: var(--compare-button-text);
+    border-color: var(--border);
+  }
+
+  .comparison-button:hover {
+    background-color: var(--compare-button-hover);
+    color: var(--compare-button-hover-text);
+  }
+
+  .textbox {
+    @apply px-4 py-3 rounded-md shadow-inner border focus:outline-none focus:ring-2 transition-all duration-200;
+    background-color: var(--bg-card);
+    color: var(--text);
+    border-color: #d1d5db;
+  }
+  .textbox:hover {
+    @apply px-4 py-3 rounded-md shadow-inner border focus:outline-none focus:ring-2 transition-all duration-200;
+    background-color: var(--bg-card-hover);
+  }
+
+  .toolbar {
+    @apply w-full flex items-center justify-between px-6 py-4 shadow;
+    background-color: var(--bg-card);
+  }
+
+  .fab {
+    @apply fixed bottom-6 right-6 w-14 h-14 text-white rounded-md flex items-center justify-center shadow-xl hover:scale-105 transition-transform duration-200 ease-in-out;
+    background-color: var(--navbar);
+  }
+
+  .btn-delete {
+    @apply transition duration-200;
+    color: var(--custom-delete-text);
+
+    /* Set text color based on theme variable */
+    &:hover {
+      color: var(--custom-delete-text-hover);
+      /* Set hover color based on theme variable */
+    }
+  }
+
+}
+
+/* Update text color and background color */
+@layer utilities {
+
+  /* Adjusting text colors for better contrast */
+  .text-text {
+    color: var(--text);
+  }
+
+  .text-subtext {
+    color: var(--subtext);
+  }
+
+  /* Fixing text color for light backgrounds */
+  .text-gray-500 {
+    color: var(--subtext) !important;
+    /* Adjust text color to subtext */
+  }
+
+  /* Fixing borders */
+  .border-border {
+    border-color: var(--border) !important;
+  }
+
+  /* Background for cards */
+  .bg-card {
+    background-color: var(--card) !important;
+  }
+
+  /* Surface background */
+  .bg-surface {
+    background-color: var(--bg-card) !important;
+  }
+
+  .bg-navbar {
+    background-color: var(--navbar);
+    color: var(--text-navbar);
+  }
+
+  .add-product-button {
+    @apply px-4 py-2 rounded-md transition-all cursor-pointer border;
+    padding: 0.5rem 1rem;
+    /* optional: rounded corners */
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    background-color: var(--custom-add-product);
+    color: var(--custom-add-product-text);
+    border-color: var(--custom-add-product-border);
+  }
+
+  .add-product-button:hover {
+    background-color: var(--custom-add-product-hover, var(--custom-add-product));
+    color: var(--custom-add-product-text-hover, var(--custom-add-product-text));
+    border-color: var(--custom-add-product-border-hover, var(--custom-add-product-border));
+  }
+
+  .dark .add-product-button {
+    background-color: var(--dark-custom-add-product);
+    color: var(--dark-custom-add-product-text);
+    border-color: var(--dark-custom-add-product-border);
+    padding: 0.5rem 1rem;
+    /* optional: rounded corners */
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+  }
+
+  .dark .add-product-button:hover {
+    background-color: var(--dark-custom-add-product-hover, var(--dark-custom-add-product));
+    color: var(--dark-custom-add-product-text-hover, var(--dark-custom-add-product-text));
+    border-color: var(--dark-custom-add-product-border-hover, var(--dark-custom-add-product-border));
+  }
+
+  .submit-button {
+    background-color: var(--custom-compare-button);
+    color: var(--custom-compare-button-text);
+    /* border: none; */
+    padding: 0.5rem 1rem;
+    /* optional: rounded corners */
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-button:hover {
+    filter: brightness(0.95);
+    /* subtle hover effect */
+  }
+
+  .dark .submit-button {
+    background-color: var(--dark-custom-compare-button);
+    color: var(--dark-custom-compare-button-text);
+  }
+
+  .dark .submit-button:hover {
+    filter: brightness(1.1);
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 30px !important;
+    height: 30px !important;
+    color: orange !important;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 18px !important;
+    font-weight: bold;
+  }
+}
