@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react';
 import LoadingScreen from '@/components/layout/LoadingScreen';
 import ProductTable from '@/components/layout/ProductTable';
 import Footer from '@/components/layout/Footer';
-import SkeletonLoader from '../ui/SkeletonLoader';
 
 export default function ComparisonClient() {
     const [loading, setLoading] = useState(true);
