@@ -54,9 +54,9 @@ const Navbar = () => {
                 {/* <Link href="/#" className="text-[var(--light-h1-text)] dark:text-[var(--dark-h1-text)] hover:underline">
                     Pro Features
                 </Link> */}
-                <Link href="/#" className="text-[var(--light-h1-text)] dark:text-[var(--dark-h1-text)] hover:underline">
+                {/* <Link href="/#" className="text-[var(--light-h1-text)] dark:text-[var(--dark-h1-text)] hover:underline">
                     Our Company
-                </Link>
+                </Link> */}
             </nav>
 
             {/* Right: Theme Toggle & Hamburger Menu */}
@@ -90,13 +90,13 @@ const Navbar = () => {
                     >
                         Pro Features
                     </Link> */}
-                    <Link
+                    {/* <Link
                         href="/#"
                         className="text-[var(--light-h1-text)] dark:text-[var(--dark-h1-text)] hover:underline text-lg"
                         onClick={handleLinkClick}
                     >
                         Our Company
-                    </Link>
+                    </Link> */}
                 </nav>
             )}
         </header>
