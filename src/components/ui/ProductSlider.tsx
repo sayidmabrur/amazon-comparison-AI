@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import LessonBookCard from './LessonBookCard'; // Adjust the import path if necessary
+import LessonBookCard from './LessonBookCard';
 
 export default function ProductSlider() {
     const products = [
@@ -54,7 +54,7 @@ export default function ProductSlider() {
     ];
 
     return (
-        <div className="w-full flex py-3 justify-end">
+        <div className="hidden lg:flex w-full py-3 justify-end">
             <div className="w-full max-w-md">
                 <Swiper
                     modules={[Navigation, Pagination]}

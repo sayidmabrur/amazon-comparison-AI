@@ -59,7 +59,7 @@ export default function HomePage() {
     <main className="min-h-screen text-gray-900 font-sans">
       <Navbar />
 
-      <div className="container px-20 mx-auto py-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <div className="container max-w-screen-xl px-6 sm:px-10 lg:px-16 xl:px-20 mx-auto py-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-start">
         {/* Left content animated */}
         <motion.div
           className="w-full space-y-6 max-w-xl"
