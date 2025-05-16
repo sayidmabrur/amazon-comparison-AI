@@ -21,9 +21,11 @@
   --text-card: #000000ef;
   --bg-card: #ffffff;
   --bg-card-hover: #d6d4d4d8;
+  --custom-subtext: #F46C52;
+  --footer-bg: #ffffffef;
 
   /* Custom Colors */
-  --custom-h1-text: #346450;
+  --custom-landing-page-price-text: #F56565;
   --custom-compare-button: #F46C52;
   --custom-add-product: transparent;
   --custom-add-product-hover: #346450;
@@ -39,11 +41,11 @@
 }
 
 .dark {
-  --bg: #393E46;
+  --bg: #020408;
   --text: #e5e7eb;
   --h1-text: #c7c7c7;
   --subtext: #e5e7eb;
-  --navbar: #393E46;
+  --navbar: #020408;
   --text-navbar: #fcfcfc;
   --border: #000000;
   --compare-button: #0d1d47;
@@ -54,17 +56,23 @@
   --text-card: #000000ef;
   --bg-card: #757575;
   --bg-card-hover: #b4b2b2;
+  --custom-subtext: #a7a7a7;
+  --footer-bg: #10111a;
 
-  --custom-h1-text: #d9e785;
-  --custom-compare-button: #0d1d47;
-  --custom-add-product: #DFD0B8;
-  --custom-add-product-border: #2D3748;
-  --custom-add-product-text: #2D3748;
+
+  /* Custom Colors */
+  --custom-landing-page-price-text: #4a4cec;
+  --custom-compare-button: #811cff;
+  --custom-add-product: #37393b;
+  --custom-add-product-hover: #ffffff;
+  --custom-add-product-text-hover: #ffffff;
+  --custom-add-product-text: #ffffff;
+  --custom-add-product-border: #ffffff;
   --custom-compare-button-text: #ffffff;
-  --custom-delete-text: #d4ff17;
-  /* Dark Mode Red Color */
-  --custom-delete-text-hover: #11ce2b;
-  /* Dark Mode Hover Red Color */
+  --custom-delete-text: #F56565;
+  /* Light Mode Red Color */
+  --custom-delete-text-hover: #4a4cec;
+  /* Light Mode Hover Red Color */
 
 }
 
@@ -103,6 +111,7 @@
     color: var(--text);
     border-color: #d1d5db;
   }
+
   .textbox:hover {
     @apply px-4 py-3 rounded-md shadow-inner border focus:outline-none focus:ring-2 transition-all duration-200;
     background-color: var(--bg-card-hover);
@@ -188,9 +197,9 @@
   }
 
   .dark .add-product-button {
-    background-color: var(--dark-custom-add-product);
-    color: var(--dark-custom-add-product-text);
-    border-color: var(--dark-custom-add-product-border);
+    background-color: var(--custom-add-product);
+    color: var(--custom-add-product-text);
+    border-color: var(--custom-add-product-border);
     padding: 0.5rem 1rem;
     /* optional: rounded corners */
     cursor: pointer;
@@ -199,9 +208,9 @@
   }
 
   .dark .add-product-button:hover {
-    background-color: var(--dark-custom-add-product-hover, var(--dark-custom-add-product));
-    color: var(--dark-custom-add-product-text-hover, var(--dark-custom-add-product-text));
-    border-color: var(--dark-custom-add-product-border-hover, var(--dark-custom-add-product-border));
+    background-color: var(--custom-add-product-hover);
+    color: var(--custom-add-product-text-hover, var(--custom-add-product-text));
+    border-color: var(--custom-add-product-border-hover, var(--custom-add-product-border));
   }
 
   .submit-button {
@@ -220,8 +229,8 @@
   }
 
   .dark .submit-button {
-    background-color: var(--dark-custom-compare-button);
-    color: var(--dark-custom-compare-button-text);
+    background-color: var(--custom-compare-button);
+    color: var(--custom-compare-button-text);
   }
 
   .dark .submit-button:hover {
@@ -239,5 +248,17 @@
   .swiper-button-prev::after {
     font-size: 18px !important;
     font-weight: bold;
+  }
+
+  .custom-subtext {
+    color: var(--custom-subtext);
+  }
+
+  .custom-landing-page-price-text {
+    color: var(--custom-landing-page-price-text)
+  }
+
+  .footer {
+    background-color: var(--footer-bg);
   }
 }

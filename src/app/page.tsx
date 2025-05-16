@@ -68,13 +68,13 @@ export default function HomePage() {
           viewport={{ once: true }}
           variants={slideInLeft}
         >
-          <p className="text-sm text-orange-600 font-semibold uppercase tracking-wide">
+          <p className="text-sm custom-subtext font-semibold uppercase tracking-wide">
             Analysis &nbsp;&middot;&nbsp; RECOMMENDATION &nbsp;&middot;&nbsp; Benchmark
           </p>
           <h1 className="text-4xl font-semibold max-w-xl " style={{ color: 'var(--h1-text)' }}>
             Smart Amazon Product Comparison with <b>AI</b>
           </h1>
-          <p className="max-w-md">
+          <p className="max-w-md text-subtext">
             Paste in Amazon product <b>up-to 10</b> URLs, and our AI will compare them and recommend the best choice for you.
           </p>
           <div className="mt space-y-4">
@@ -85,7 +85,7 @@ export default function HomePage() {
                 value={link}
                 onChange={(e) => handleInputChange(i, e.target.value)}
                 placeholder="Paste product URL here"
-                className="w-full rounded-md border border-gray-300 p-3 focus:ring-2 focus:ring-orange-500"
+                className="w-full rounded-md border border-gray-300 p-3 focus:ring-2 focus:ring-orange-500 text-subtext"
               />
             ))}
           </div>

@@ -29,7 +29,7 @@ export default function LessonBookCard({ product }: { product: Product }) {
 
             {/* Price and Rating */}
             <div className="flex items-center justify-between mb-3">
-                <span className="text-xl font-bold text-orange-600">{product.price}</span>
+                <span className="text-xl font-bold custom-landing-page-price-text">{product.price}</span>
                 <div className="flex items-center space-x-1">
                     {[...Array(5)].map((_, i) => (
                         <svg
@@ -58,10 +58,10 @@ export default function LessonBookCard({ product }: { product: Product }) {
 
             {/* Actions */}
             <div className="flex justify-between items-center">
-                <button className="bg-orange-600 hover:bg-orange-700 text-white rounded-lg px-4 py-2 font-semibold transition">
+                <button className="submit-button hover:bg-orange-700 text-white rounded-lg px-4 py-2 font-semibold transition">
                     Add to Compare
                 </button>
-                <button className="text-orange-600 hover:underline font-semibold text-sm">
+                <button className="hover:underline font-semibold text-sm">
                     View Details
                 </button>
             </div>

@@ -17,7 +17,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="px-15 bg-white border-t border-gray-200">
+        <footer className="px-15 footer shadow-lg">
             <div className="max-w-7xl mx-auto px-6 py-12">
                 {/* Top Section */}
                 <motion.div
@@ -29,8 +29,8 @@ export default function Footer() {
                 >
                     {/* Logo and Slogan */}
                     <div className="flex items-center space-x-2">
-                        <FaBoxOpen className="text-[var(--light-h1-text)] dark:text-[var(--dark-h1-text)]" size={28} />
-                        <span className="text-lg font-semibold text-[#1A1A1A]">ProductWise</span>
+                        <FaBoxOpen className="text-[var(--light-h1-text)] dark:text-blue-500" size={28} />
+                        <span className="text-lg font-semibold text-[#1A1A1A] text-gray-600">ProductWise</span>
                     </div>
                     <p className="text-sm text-gray-600 mt-4 md:mt-0">
                         Smart Amazon Product AI Comparison with AI.
@@ -39,7 +39,7 @@ export default function Footer() {
 
                 {/* Middle Grid */}
                 <motion.div
-                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-sm text-gray-700 mb-12"
+                    className="grid grid-cols-1 text-gray-600 sm:grid-cols-2 md:grid-cols-3 gap-8 text-sm mb-12"
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
@@ -47,7 +47,7 @@ export default function Footer() {
                 >
                     {/* Company */}
                     <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">Company</h3>
+                        <h3 className="font-bold mb-3">Company</h3>
                         <ul className="space-y-2">
                             <li><a href="#" className="hover:text-blue-600">Home</a></li>
                             <li><a href="#" className="hover:text-blue-600">Pro Features</a></li>
@@ -57,7 +57,7 @@ export default function Footer() {
 
                     {/* Contact */}
                     <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">Contact</h3>
+                        <h3 className="font-bold mb-3">Contact</h3>
                         <ul className="space-y-3">
                             <li className="flex items-center gap-2">
                                 <MailIcon size={16} className="text-blue-600" /> info@productwise.com
@@ -72,13 +72,13 @@ export default function Footer() {
                     </div>
                     {/* Contact */}
                     <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">Find Us On</h3>
+                        <h3 className="font-bold mb-3">Find Us On</h3>
                         <ul className="space-y-3">
                             <div className="flex items-center gap-3 mt-2 md:mt-0">
-                                <a href="#" className="text-gray-700 hover:text-blue-600"><Linkedin size={20} /></a>
-                                <a href="#" className="text-gray-700 hover:text-blue-600"><InstagramIcon size={20} /></a>
-                                <a href="#" className="text-gray-700 hover:text-blue-600"><FacebookIcon size={20} /></a>
-                                <a href="#" className="text-gray-700 hover:text-blue-600"><YoutubeIcon size={20} /></a>
+                                <a href="#" className="text-gray-600 hover:text-blue-600"><Linkedin size={20} /></a>
+                                <a href="#" className="text-gray-600 hover:text-blue-600"><InstagramIcon size={20} /></a>
+                                <a href="#" className="text-gray-600 hover:text-blue-600"><FacebookIcon size={20} /></a>
+                                <a href="#" className="text-gray-600 hover:text-blue-600"><YoutubeIcon size={20} /></a>
                             </div>
 
                         </ul>
