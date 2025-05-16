@@ -54,7 +54,7 @@ export default function ProductSlider() {
     ];
 
     return (
-        <div className="w-full flex py-3 justify-center">
+        <div className="w-full flex py-3 justify-end">
             <div className="w-full max-w-md">
                 <Swiper
                     modules={[Navigation, Pagination]}

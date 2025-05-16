@@ -13,7 +13,7 @@ import LoadingScreen from '@/components/layout/LoadingScreen';
 export default function HomePage() {
   const [productLinks, setProductLinks] = useState<string[]>(['', '']);
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(true); // 👈 loading state
+  const [loading, setLoading] = useState(true);
 
   const inputRefs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
@@ -59,7 +59,7 @@ export default function HomePage() {
     <main className="min-h-screen text-gray-900 font-sans">
       <Navbar />
 
-      <div className="container mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <div className="container px-20 mx-auto py-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         {/* Left content animated */}
         <motion.div
           className="w-full space-y-6 max-w-xl"
@@ -97,7 +97,7 @@ export default function HomePage() {
 
         {/* Right content animated */}
         <motion.div
-          className="w-full py-0 flex justify-center"
+          className="w-full py-0 flex"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

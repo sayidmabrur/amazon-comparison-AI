@@ -45,7 +45,7 @@ export default function ProductModal({ isOpen, onClose, onCompare }: ProductModa
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-red-600 text-2xl font-bold transition-colors duration-200"
+          className="absolute top-4 right-4 text-gray-800 hover:text-red-600 text-2xl font-bold transition-colors duration-200"
         >
           &times;
         </button>

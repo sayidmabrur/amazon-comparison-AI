@@ -10,7 +10,7 @@ interface SubmitButtonProps {
 const SubmitButton: React.FC<SubmitButtonProps> = ({ onClick, text, className }) => {
   return (
     <button
-      className={className || 'submit-button'}
+      className={className || 'submit-button rounded-lg'}
       onClick={onClick}
     >
       {text}

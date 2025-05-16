@@ -8,7 +8,7 @@
 :root {
   --bg: #F8FAF7;
   --text: #000000;
-  --h1-text: #346450;
+  --h1-text: #313131;
   --subtext: #313131;
   --border: #000000;
   --navbar: #FFFDFF;
@@ -28,7 +28,7 @@
   --custom-landing-page-price-text: #F56565;
   --custom-compare-button: #F46C52;
   --custom-add-product: transparent;
-  --custom-add-product-hover: #346450;
+  --custom-add-product-hover: #2b7fff;
   --custom-add-product-text-hover: #ffffff;
   --custom-add-product-text: #346450;
   --custom-add-product-border: #346450;
