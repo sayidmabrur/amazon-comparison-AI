@@ -1,12 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
 import LoadingScreen from '@/components/layout/LoadingScreen';
 import ProductTable from '@/components/layout/ProductTable';
 import Footer from '@/components/layout/Footer';
+import { motion } from 'framer-motion';
 
 export default function ComparisonClient() {
     const [loading, setLoading] = useState(true);
@@ -20,6 +20,7 @@ export default function ComparisonClient() {
         const rawLinks = searchParams.get('links');
 
         if (!rawLinks) return;
+        const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
         const fetchData = async () => {
             try {
@@ -44,36 +45,35 @@ export default function ComparisonClient() {
             } catch (err) {
                 console.error('Failed to decode or fetch:', err);
             } finally {
+                await sleep(2000); // 2-second delay before loading false
                 setLoading(false);
             }
         };
 
-
         fetchData();
     }, [searchParams]);
-
-    console.log(products)
-
 
     if (loading) {
         return <LoadingScreen text="Letting our smartest algorithms do the heavy lifting — your perfect pick is on the way!" />;
     }
+
     return (
-        <div className="min-h-screen transition-colors duration-300">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="min-h-screen transition-colors duration-300"
+        >
             <Navbar />
             <main className="max-w-7xl mx-auto px-6">
-                {/* <h5 className="text-2xl font-semibold mb-6">Here is the comparison result of the products!</h5> */}
-
                 <ProductTable
                     products={products}
                     AIConclusion={AIConclusion}
                     AIRecommend={AIRecommendation}
-
                 />
-
             </main>
-            <Footer />  {/* Include Footer here */}
-
-        </div>
+            <Footer />
+        </motion.div>
     );
 }
