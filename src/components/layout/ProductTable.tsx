@@ -34,11 +34,11 @@ export default function ProductTable({ products, AIConclusion, AIRecommend }: Pr
         <div className="p-6 w-full max-w-full overflow-hidden">
             {/* Controls */}
             <div className="flex justify-between mb-6 text">
-                <IconButton
+                {/* <IconButton
                     icon={<Brain size={16} />}
                     text={showSummary ? "Back to Table" : "AI Recommendations"}
                     onClick={handleClick}
-                />
+                /> */}
 
                 {/* <button
                     onClick={handleCopy}
@@ -50,10 +50,11 @@ export default function ProductTable({ products, AIConclusion, AIRecommend }: Pr
             </div>
 
             {/* Conditional rendering */}
-            {showSummary
+            <ProductComparisonTable products={products} />
+            {/* {showSummary
                 ? <AISummary AIConclusion={AIConclusion} AIRecommend={AIRecommend} />
                 : <ProductComparisonTable products={products} />
-            }
+            } */}
         </div>
     );
 }
