@@ -23,6 +23,7 @@
   --bg-card-hover: #d6d4d4d8;
   --custom-subtext: #F46C52;
   --footer-bg: #ffffffef;
+  --logo-button: #2B7FFF;
 
   /* Custom Colors */
   --custom-landing-page-price-text: #F56565;
@@ -58,6 +59,7 @@
   --bg-card-hover: #b4b2b2;
   --custom-subtext: #a7a7a7;
   --footer-bg: #10111a;
+  --logo-button: #811cff;
 
 
   /* Custom Colors */
@@ -211,6 +213,10 @@
     background-color: var(--custom-add-product-hover);
     color: var(--custom-add-product-text-hover, var(--custom-add-product-text));
     border-color: var(--custom-add-product-border-hover, var(--custom-add-product-border));
+  }
+
+  .logo-button {
+    color: var(--logo-button);
   }
 
   .submit-button {

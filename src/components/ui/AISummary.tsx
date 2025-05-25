@@ -1,73 +1,51 @@
 import { displayImage } from '@/utils/helpers';
-interface AIRecommendationItem {
-    aspect: string;
-    content: string;
-}
+import ProductWinner from './ProductWinner';
+import ScoreComparisonTable from './ScoreComparisonTable';
+
+// interface AIRecommendationItem {
+//     aspect: string;
+//     content: string;
+//     score: any;
+// }
 
 interface AISummaryProps {
-    AIConclusion: string;
-    AIRecommend: AIRecommendationItem[];
+    AIConclusion: any;
+    AIRecommend: any;
+    ProductRecommend: any;
+    Product: any;
 }
 
-export default function AISummary({ AIConclusion, AIRecommend }: AISummaryProps) {
-    const renderTextWithEmbeddedProduct = (text: string) => {
-        const match = text.match(/(\{.*?\})/); // Find first JSON-like object
-        if (match) {
-            const jsonPart = match[1];
-            const remainingText = text.replace(jsonPart, '').trim();
-
-            try {
-                const parsed = JSON.parse(jsonPart.replace(/'/g, '"'));
-
-                return (
-                    <div className="flex items-start gap-4">
-                        {parsed.img_url && (
-                            <img
-                                src={displayImage(parsed.image_url)}
-                                alt={parsed.product_name || 'Product Image'}
-                                className="w-14 h-14 object-cover rounded-md border"
-                            />
-                        )}
-                        <div>
-                            <p className="font-semibold text-gray-900">{parsed.product_name}</p>
-                            {remainingText && (
-                                <p className="text-sm text-gray-600 mt-1">{remainingText}</p>
-                            )}
-                        </div>
-                    </div>
-                );
-            } catch (error) {
-                // If parsing fails, fallback to raw text
-                return <p>{text}</p>;
-            }
-        }
-
-        return <p>{text}</p>;
-    };
-
+export default function AISummary({ AIConclusion, AIRecommend, ProductRecommend, Product }: AISummaryProps) {
+    // CONSOLE.LO
     return (
         <div className="p-4 border card border-gray-200 rounded-lg text-sm text-gray-700">
             <h2 className="text-lg font-semibold mb-4">AI Summary</h2>
 
             <div className="mb-4">
                 <p className="font-medium text-gray-800">Conclusion:</p>
-                {renderTextWithEmbeddedProduct(AIConclusion)}
+                {AIConclusion?.content ?? "Not Cconclusion available"}
             </div>
-
-            <div>
-                <p className="font-medium text-gray-800 mb-2">Recommendations:</p>
-                <div className="space-y-3">
-                    {AIRecommend.map((item, index) => (
-                        <div
-                            key={index}
-                            className="p-3 border border-gray-300 rounded-md bg-white shadow-sm"
-                        >
-                            <p className="text-sm font-semibold text-blue-700 mb-1">
-                                {item.aspect}
-                            </p>
-                            {renderTextWithEmbeddedProduct(item.content)}
-                        </div>
-                    ))}
+            <div className="mb-6">
+            <p className="font-medium text-gray-800 mb-2">Score Comparison:</p>
+                <ScoreComparisonTable AIRecommend={AIRecommend} FinalScore={AIConclusion?.score} Product={Product}/>
+            </div>
+            <div className="mb-6">
+                <p className="font-medium text-gray-800 mb-2">Best Option:</p>
+                <div className="flex items-center gap-6 p-4 border-gray-200 m-10 rounded-lg border">
+                    <ProductWinner
+                        AIRecommend={AIRecommend}
+                        RecommendedProductAttribute={ProductRecommend} />
+                    {/* <img
+                        src={displayImage("")}
+                        alt="Winner Product"
+                        className="w-24 h-24 object-cover rounded-lg border-2 border-green-500 shadow-md"
+                    />
+                    <div>
+                        <p className="text-lg font-semibold text-green-800">{"Name of the Product"}</p>
+                        {/* <div className="space-y-3">
+                </div> */}
+                    {/* <p className="text-sm text-gray-600">Top performing product based on AI benchmark analysis.</p> */}
+                    {/* </div> */}
                 </div>
             </div>
         </div>

@@ -38,7 +38,7 @@ const Navbar = () => {
             <div className="flex-1">
                 <Link href="/" passHref>
                     <div className="flex items-center gap-2 cursor-pointer">
-                        <FaBoxOpen className="text-[var(--light-h1-text)] dark:text-blue-500" size={28} />
+                        <FaBoxOpen className="logo-button" size={28} />
                         <h1 className="text-2xl tracking-wide text-[var(--light-h1-text)] dark:text-[var(--dark-h1-text)]">
                             ProductWise
                         </h1>

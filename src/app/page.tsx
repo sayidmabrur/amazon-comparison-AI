@@ -19,7 +19,7 @@ export default function HomePage() {
 
   // Delay loading for 5 seconds
   useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), 1500);
+    const timeout = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timeout); // cleanup
   }, []);
 
