@@ -6,15 +6,22 @@ import { AlertCircle, Star, ChevronDown, ChevronUp } from 'lucide-react';
 import { displayImage } from '@/utils/helpers';
 
 
-interface RecommendedProductAttribute {
-  title: string,
-  image_path: string
-  rating: string
+interface Recommendation {
+  aspect: string;
+  content: string;
 }
+
+interface RecommendedProductAttribute {
+  title: string;
+  image_path: string;
+  rating: string;
+}
+
 interface Props {
-  AIRecommend: any;
+  AIRecommend: Recommendation[];
   RecommendedProductAttribute: RecommendedProductAttribute;
 }
+
 
 export default function ProductWinner({ AIRecommend, RecommendedProductAttribute }: Props) {
   const [showAll, setShowAll] = useState(false);
