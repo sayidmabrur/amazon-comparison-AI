@@ -5,6 +5,7 @@ import { useState } from 'react'
 import IconButton from '../ui/IconButton'
 import AISummary from '../ui/AISummary'
 import ProductComparisonTable from '../ui/ProductComparisonTable'
+import { motion, AnimatePresence } from 'framer-motion';
 
 type ProductTableProps = {
     products: any;  // Accept any structure,
@@ -78,30 +79,46 @@ export default function ProductTable({ products, AIConclusion, AIConclusionLarge
                     text={showSummary ? "Back to Table" : "AI Recommendations"}
                     onClick={toggleSummary}
                 />
-
-                {/* Show the large toggle only if summary is shown */}
                 {showSummary && (
                     <button
                         onClick={toggleUseLarge}
                         className="flex items-center gap-2 px-3 py-2 rounded-md text-sm textbox"
-                        aria-pressed={useLarge} // accessibility: indicates toggle state
+                        aria-pressed={useLarge}
                     >
                         {useLarge ? "GPT-4.1-Nano" : "GPT-4.1"}
                     </button>
                 )}
             </div>
 
-            {/* Conditional rendering */}
-            {showSummary ? (
-                <AISummary
-                    AIConclusion={conclusionToShow}
-                    AIRecommend={recommendationToShow}
-                    ProductRecommend={handleRecommendedProductAttribute()}
-                    Product={products}
-                />
-            ) : (
-                <ProductComparisonTable products={products} />
-            )}
+            {/* Animated content switch */}
+            <AnimatePresence mode="wait">
+                {showSummary ? (
+                    <motion.div
+                        key="summary"
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -30 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <AISummary
+                            AIConclusion={conclusionToShow}
+                            AIRecommend={recommendationToShow}
+                            ProductRecommend={handleRecommendedProductAttribute()}
+                            Product={products}
+                        />
+                    </motion.div>
+                ) : (
+                    <motion.div
+                        key="table"
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 30 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <ProductComparisonTable products={products} />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

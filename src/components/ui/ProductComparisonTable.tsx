@@ -3,6 +3,7 @@
 import { JSX } from 'react';
 import { Star } from 'lucide-react';
 import { displayImage } from '@/utils/helpers';
+import { Box, Typography, Paper, Rating } from '@mui/material';
 
 type RawProductData = {
     aspect: string;
@@ -69,7 +70,67 @@ export default function ProductComparisonTable({ products }: ProductComparisonTa
                                             {value}
                                         </span>
                                     );
-                                } else {
+                                }
+                                else if (type === 'review') {
+                                    return (
+                                        <Box display="flex" flexDirection="column" gap={2}>
+                                            {/* Positive Review */}
+                                            <Box
+                                                sx={{
+                                                    border: '1px solid #E0E0E0',
+                                                    borderRadius: 1,
+                                                    p: 2,
+                                                    backgroundColor: '#FCFCFC',
+                                                    minHeight: 160,
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    justifyContent: 'space-between'
+                                                }}
+                                            >
+                                                <Box display="flex" alignItems="center" gap={1} mb={0.5}>
+                                                    <Rating value={value.positive_rating} readOnly size="small" precision={0.5} />
+                                                    <Typography variant="body2" fontWeight={500}>
+                                                        {value.positive_rating} out of 5
+                                                    </Typography>
+                                                </Box>
+                                                <Typography variant="subtitle2" fontWeight={600} color="text.primary" mb={0.5}>
+                                                    Positive
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary" fontStyle="italic">
+                                                    “{value.positive_review}”
+                                                </Typography>
+                                            </Box>
+
+                                            {/* Negative Review */}
+                                            <Box
+                                                sx={{
+                                                    border: '1px solid #E0E0E0',
+                                                    borderRadius: 1,
+                                                    p: 2,
+                                                    backgroundColor: '#FCFCFC',
+                                                    minHeight: 160,
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    justifyContent: 'space-between'
+                                                }}
+                                            >
+                                                <Box display="flex" alignItems="center" gap={1} mb={0.5}>
+                                                    <Rating value={value.negative_rating} readOnly size="small" precision={0.5} />
+                                                    <Typography variant="body2" fontWeight={500}>
+                                                        {value.negative_rating} out of 5
+                                                    </Typography>
+                                                </Box>
+                                                <Typography variant="subtitle2" fontWeight={600} color="text.primary" mb={0.5}>
+                                                    Negative
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary" fontStyle="italic">
+                                                    “{value.negative_review}”
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    );
+                                }
+                                else {
                                     return <span className="text-black">{value}</span>;
                                 }
                             }}
