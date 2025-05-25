@@ -16,6 +16,7 @@ export default function ComparisonClient() {
     const [AIRecommendation, setAIRecommendation] = useState([]);
     const [AIRecommendationLarge, setAIRecommendationLarge] = useState([]);
     const [RecommendedIndex, setRecommendedIndex] = useState(0);
+    const [RecommendedIndexLarge, setRecommendedIndexLarge] = useState(0);
 
     const searchParams = useSearchParams();
 
@@ -48,6 +49,7 @@ export default function ComparisonClient() {
                     setAIRecommendation(data.data.AI_recommendation || []);
                     setAIRecommendationLarge(data.data.AI_recommendation_large || []);
                     setRecommendedIndex(data.data.index_recommendation || 0);
+                    setRecommendedIndexLarge(data.data.index_recommendation_large || 0);
                 } else {
                     console.error('API error:', response.statusText);
                 }
@@ -83,6 +85,7 @@ export default function ComparisonClient() {
                     AIRecommendation={AIRecommendation}
                     AIRecommendationLarge={AIRecommendationLarge}
                     RecommendedIndex={RecommendedIndex}
+                    recommendedIndexLarge={RecommendedIndexLarge}
                 />
             </main>
             <Footer />

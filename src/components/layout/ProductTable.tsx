@@ -14,6 +14,7 @@ type ProductTableProps = {
     AIRecommendation: any[];
     AIRecommendationLarge: any[];
     RecommendedIndex: number;
+    recommendedIndexLarge: number;
 }
 
 interface RecommendedAttribute {
@@ -22,7 +23,7 @@ interface RecommendedAttribute {
     rating: string;
 }
 
-export default function ProductTable({ products, AIConclusion, AIConclusionLarge, AIRecommendation, AIRecommendationLarge, RecommendedIndex }: ProductTableProps) {
+export default function ProductTable({ products, AIConclusion, AIConclusionLarge, AIRecommendation, AIRecommendationLarge, RecommendedIndex, recommendedIndexLarge}: ProductTableProps) {
     const [showSummary, setShowSummary] = useState(false);
     const [useLarge, setUseLarge] = useState(false);  // New toggle state for large/small
     const [copied, setCopied] = useState(false);
@@ -69,7 +70,7 @@ export default function ProductTable({ products, AIConclusion, AIConclusionLarge
     const recommendationToShow = useLarge
         ? (AIRecommendationLarge.length > 0 ? AIRecommendationLarge : AIRecommendation)
         : AIRecommendation;
-
+    const idxToShow = useLarge && RecommendedIndex ? recommendedIndexLarge : RecommendedIndex;
     return (
         <div className="p-6 w-full max-w-full overflow-hidden">
             {/* Controls */}
