@@ -57,11 +57,11 @@ export default function LessonBookCard({ product }: { product: Product }) {
             </p>
 
             {/* Actions */}
-            <div className="flex justify-between items-center">
-                <button className="submit-button hover:bg-orange-700 text-white rounded-lg px-4 py-2 font-semibold transition">
+            <div className="flex justify-center items-center">
+                {/* <button className="submit-button hover:bg-orange-700 text-white rounded-lg px-4 py-2 font-semibold transition">
                     Add to Compare
-                </button>
-                <button className="hover:underline font-semibold text-sm">
+                </button> */}
+                <button className="rounded-lg w-100 submit-button hover:underline font-semibold text-sm">
                     View Details
                 </button>
             </div>
