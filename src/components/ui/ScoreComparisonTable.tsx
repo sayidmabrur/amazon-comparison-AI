@@ -7,8 +7,11 @@ import {
     TableRow,
     Paper,
     Typography,
-    Box
+    Box,
+    Tooltip,
+    IconButton
 } from '@mui/material';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 type ScoreComparisonTableProps = {
     AIRecommend: any;
@@ -19,8 +22,8 @@ type ScoreComparisonTableProps = {
 const highlightColor = '#d0f0c0'; // light green background for highest scores
 
 export default function ScoreComparisonTable({ AIRecommend, FinalScore, Product }: ScoreComparisonTableProps) {
+    console.log("recommend:", AIRecommend);
     if (!AIRecommend || !Array.isArray(AIRecommend)) return null;
-
     const aspectTitles = AIRecommend.map((row: any) => row.aspect);
     const productCount = AIRecommend[0]?.score?.length || 0;
 
@@ -36,11 +39,33 @@ export default function ScoreComparisonTable({ AIRecommend, FinalScore, Product 
                 <Table stickyHeader size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell><strong>Product</strong></TableCell>
-                            <TableCell align="center"><strong>Final Score</strong></TableCell>
+                            <TableCell>
+                                {/* <Typography fontSize="0.95rem" fontWeight={600}>Product</Typography> */}
+                                <strong>Product</strong>
+                            </TableCell>
+                            <TableCell align="center">
+                                <strong>Final Score</strong>
+                                {/* <Typography fontSize="0.95rem" fontWeight={600}>Final Score</Typography> */}
+                            </TableCell>
                             {aspectTitles.map((aspect: string, i: number) => (
                                 <TableCell key={i} align="center">
-                                    <strong>{aspect}</strong>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5 }}>
+                                        <strong>{aspect}</strong>
+                                        {AIRecommend[i]?.info && (
+                                            <Tooltip
+                                                title={
+                                                    <Typography fontSize="0.9rem" fontWeight={400}>
+                                                        {AIRecommend[i].info}
+                                                    </Typography>
+                                                }
+                                                arrow
+                                            >
+                                                <IconButton size="small" sx={{ p: 0.1 }}>
+                                                    <InfoOutlinedIcon fontSize="small" />
+                                                </IconButton>
+                                            </Tooltip>
+                                        )}
+                                    </Box>
                                 </TableCell>
                             ))}
                         </TableRow>

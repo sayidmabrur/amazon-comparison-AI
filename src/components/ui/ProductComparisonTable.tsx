@@ -42,11 +42,21 @@ export default function ProductComparisonTable({ products }: ProductComparisonTa
                     label="Product"
                     render={(product) => (
                         <div className="flex items-center gap-3">
-                            <img src={displayImage(product["Product"].img_url)} alt={product["Product"].product_name} className="w-10 h-10 rounded-md object-cover" />
-                            <div className="font-medium text-black truncate">{product["Product"].product_name}</div>
+                            {/* <img src={displayImage(product["Product"].img_url)} alt={product["Product"].product_name} className="w-10 h-10 rounded-md object-cover" /> */}
+                            <div className="font-medium text-black">{product["Product"].product_name}</div>
                         </div>
                     )}
                 />
+                <Row
+                    label=""
+                    render={(product) => (
+                        <div className="flex items-center gap-3">
+                            <img src={displayImage(product["Product"].img_url)} alt={product["Product"].product_name} className="w-50 h-70 rounded-lg object-contain" />
+                            {/* <div className="font-medium text-black truncate">{product["Product"].product_name}</div> */}
+                        </div>
+                    )}
+                />
+
 
                 {aspectLabels.filter(label => label !== "Product").map((aspect) => {
                     const type = products.find(p => p.aspect === aspect)?.type;
@@ -58,13 +68,72 @@ export default function ProductComparisonTable({ products }: ProductComparisonTa
                                 const value = product[aspect];
 
                                 if (type === 'rating') {
+                                    const { rating_base, rating_breakdown } = value;
+
+                                    const starColors = {
+                                        five_star: '#FFD700',
+                                        four_star: '#C0C0C0',
+                                        three_star: '#CD7F32',
+                                        two_star: '#FFA07A',
+                                        one_star: '#FF6347',
+                                    };
+
                                     return (
-                                        <div className="flex items-center gap-1">
-                                            <span className="text-black">{value}</span>
-                                            <Star size={16} className="text-yellow-500 fill-yellow-500" />
-                                        </div>
+                                        <Box
+                                            sx={{
+                                                padding: 2,
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                gap: 1.5,
+                                                width: '100%',
+                                                minWidth: 200,
+                                            }}
+                                        >
+                                            {/* Overall Rating */}
+                                            <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" gap={0.5}>
+                                                <Rating value={rating_base} precision={0.1} readOnly size="medium" />
+                                                <Typography variant="body1" fontWeight={600}>
+                                                    {rating_base} / 5
+                                                </Typography>
+                                            </Box>
+
+                                            <Box height={1} bgcolor="#E0E0E0" my={1} />
+
+                                            {/* Breakdown */}
+                                            <Box display="flex" flexDirection="column" gap={0.75}>
+                                                {['five_star', 'four_star', 'three_star', 'two_star', 'one_star'].map((star) => {
+                                                    const data = rating_breakdown[star];
+                                                    if (!data) return null;
+
+                                                    const label = star.replace('_', ' ').replace('star', '★');
+
+                                                    return (
+                                                        <Box key={star} display="flex" alignItems="center" gap={1}>
+                                                            <Typography variant="caption" sx={{ width: 50 }}>
+                                                                {label}
+                                                            </Typography>
+                                                            <Box sx={{ flex: 1, height: 8, backgroundColor: '#eee', borderRadius: 4 }}>
+                                                                <Box
+                                                                    sx={{
+                                                                        height: '100%',
+                                                                        width: `${data.percentage}%`,
+                                                                        backgroundColor: starColors[star as keyof typeof starColors],
+                                                                        borderRadius: 4,
+                                                                    }}
+                                                                />
+                                                            </Box>
+                                                            <Typography variant="caption" sx={{ minWidth: 55 }} textAlign="right">
+                                                                {data.count} ({data.percentage}%)
+                                                            </Typography>
+                                                        </Box>
+                                                    );
+                                                })}
+                                            </Box>
+                                        </Box>
                                     );
-                                } else if (type === 'currency') {
+                                }
+
+                                else if (type === 'currency') {
                                     return (
                                         <span className="inline-block px-2 py-1 rounded-md bg-green-50 text-green-800 font-bold text-sm">
                                             {value}

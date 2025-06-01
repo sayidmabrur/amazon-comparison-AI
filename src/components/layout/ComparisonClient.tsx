@@ -17,6 +17,7 @@ export default function ComparisonClient() {
     const [AIRecommendationLarge, setAIRecommendationLarge] = useState([]);
     const [RecommendedIndex, setRecommendedIndex] = useState(0);
     const [RecommendedIndexLarge, setRecommendedIndexLarge] = useState(0);
+    const [ProductLinks, setProductLinks] = useState([]);
 
     const searchParams = useSearchParams();
 
@@ -35,9 +36,9 @@ export default function ComparisonClient() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         links: parsedLinks,
-                        dummy: false,
+                        dummy: true,
                         base_openai_model: "gpt-4.1-nano",
-                        large_openai_model: "gpt-4.1"
+                        // large_openai_model: "gpt-4.1"
                     }),
                 });
 
@@ -50,6 +51,7 @@ export default function ComparisonClient() {
                     setAIRecommendationLarge(data.data.AI_recommendation_large || []);
                     setRecommendedIndex(data.data.index_recommendation || 0);
                     setRecommendedIndexLarge(data.data.index_recommendation_large || 0);
+                    setProductLinks(data.data.links || []);
                 } else {
                     console.error('API error:', response.statusText);
                 }
@@ -67,7 +69,7 @@ export default function ComparisonClient() {
     if (loading) {
         return <LoadingScreen text="Letting our smartest algorithms do the heavy lifting — your perfect pick is on the way!" />;
     }
-
+    console.log("buynow:", ProductLinks)
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -86,6 +88,7 @@ export default function ComparisonClient() {
                     AIRecommendationLarge={AIRecommendationLarge}
                     RecommendedIndex={RecommendedIndex}
                     recommendedIndexLarge={RecommendedIndexLarge}
+                    productLinks={ProductLinks}
                 />
             </main>
             <Footer />

@@ -15,6 +15,7 @@ type ProductTableProps = {
     AIRecommendationLarge: any[];
     RecommendedIndex: number;
     recommendedIndexLarge: number;
+    productLinks: any[];
 }
 
 interface RecommendedAttribute {
@@ -23,10 +24,11 @@ interface RecommendedAttribute {
     rating: string;
 }
 
-export default function ProductTable({ products, AIConclusion, AIConclusionLarge, AIRecommendation, AIRecommendationLarge, RecommendedIndex, recommendedIndexLarge}: ProductTableProps) {
+export default function ProductTable({ products, AIConclusion, AIConclusionLarge, AIRecommendation, AIRecommendationLarge, RecommendedIndex, recommendedIndexLarge, productLinks }: ProductTableProps) {
     const [showSummary, setShowSummary] = useState(false);
     const [useLarge, setUseLarge] = useState(false);  // New toggle state for large/small
     const [copied, setCopied] = useState(false);
+    // const productLink = productLinks[RecommendedIndex];
 
     const handleRecommendedProductAttribute = (): RecommendedAttribute => {
         const productAspect = products.find((item: any) => item.aspect === 'Product');
@@ -37,7 +39,7 @@ export default function ProductTable({ products, AIConclusion, AIConclusionLarge
             return {
                 title: "Unknown",
                 image_path: "",
-                rating: "N/A"
+                rating: "N/A",
             };
         }
 
@@ -74,22 +76,30 @@ export default function ProductTable({ products, AIConclusion, AIConclusionLarge
     return (
         <div className="p-6 w-full max-w-full overflow-hidden">
             {/* Controls */}
-            <div className="flex justify-between items-center mb-6 text">
-                <IconButton
-                    icon={<Brain size={16} />}
-                    text={showSummary ? "Back to Table" : "AI Recommendations"}
-                    onClick={toggleSummary}
-                />
-                {showSummary && (
-                    <button
-                        onClick={toggleUseLarge}
-                        className="flex items-center gap-2 px-3 py-2 rounded-md text-sm textbox"
-                        aria-pressed={useLarge}
-                    >
-                        {useLarge ? "GPT-4.1-Nano" : "GPT-4.1"}
-                    </button>
-                )}
+            <div className="flex justify-between items-center mb-6">
+                {/* Left side: AI toggle */}
+                <div>
+                    <IconButton
+                        icon={<Brain size={16} />}
+                        text={showSummary ? "Back to Table" : "AI Recommendations"}
+                        onClick={toggleSummary}
+                    />
+                </div>
+
+                {/* Right side: Copy button */}
+                <div>
+                    <IconButton
+                        icon={
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M8 16h8M8 12h8m-8-4h8m-2 12H6a2 2 0 01-2-2V6a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z" />
+                            </svg>
+                        }
+                        text={copied ? "Copied!" : "Copy Link"}
+                        onClick={handleCopy}
+                    />
+                </div>
             </div>
+
 
             {/* Animated content switch */}
             <AnimatePresence mode="wait">
@@ -106,6 +116,7 @@ export default function ProductTable({ products, AIConclusion, AIConclusionLarge
                             AIRecommend={recommendationToShow}
                             ProductRecommend={handleRecommendedProductAttribute()}
                             Product={products}
+                            productLink={productLinks[RecommendedIndex]}
                         />
                     </motion.div>
                 ) : (
