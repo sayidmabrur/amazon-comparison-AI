@@ -18,16 +18,15 @@ export default function AISummary({ AIConclusion, AIRecommend, ProductRecommend,
             <h2 className="text-lg font-semibold mb-4">AI Summary</h2>
 
             <div className="mb-4">
-                <p className="font-medium text-gray-800">Conclusion:</p>
                 {AIConclusion?.content ?? "Not Conclusion available"}
             </div>
 
             <div className="mb-6">
                 {/* <p className="font-medium text-gray-800 mb-2">Score Comparison:</p> */}
                 <ScoreComparisonTable AIRecommend={AIRecommend} FinalScore={AIConclusion?.score} Product={Product} />
-                <div className="flex mt-4 items-center gap-2 mb-6 text-sm font-semibold bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent drop-shadow-md">
+                <div className="justify-end flex mt-4 items-center gap-2 mb-6 text-sm font-semibold bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent drop-shadow-md">
+                    <Sparkle size={15} className="text-blue-300 fill-blue-300" />
                     <span>based on Our AI Reasoning</span>
-                    <Sparkle size={15} className="text-blue-300 fill-blue-300"/>
                 </div>
             </div>
 

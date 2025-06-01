@@ -18,6 +18,13 @@ type ProductComparisonTableProps = {
 export default function ProductComparisonTable({ products }: ProductComparisonTableProps) {
     const transformedProducts = transformProductData(products);
     const aspectLabels = products.map(p => p.aspect);
+    const starLabels = {
+        five_star: '5 ★',
+        four_star: '4 ★',
+        three_star: '3 ★',
+        two_star: '2 ★',
+        one_star: '1 ★',
+    };
 
     const Row = ({ label, render }: { label: string, render: (product: Record<string, any>) => JSX.Element }) => (
         <div className="grid grid-cols-[180px_1fr] gap-4 py-4 text-sm border-t border-gray-100 first:border-t-0">
@@ -105,12 +112,10 @@ export default function ProductComparisonTable({ products }: ProductComparisonTa
                                                     const data = rating_breakdown[star];
                                                     if (!data) return null;
 
-                                                    const label = star.replace('_', ' ').replace('star', '★');
-
                                                     return (
                                                         <Box key={star} display="flex" alignItems="center" gap={1}>
                                                             <Typography variant="caption" sx={{ width: 50 }}>
-                                                                {label}
+                                                                {starLabels[star as keyof typeof starLabels]}
                                                             </Typography>
                                                             <Box sx={{ flex: 1, height: 8, backgroundColor: '#eee', borderRadius: 4 }}>
                                                                 <Box
@@ -128,6 +133,7 @@ export default function ProductComparisonTable({ products }: ProductComparisonTa
                                                         </Box>
                                                     );
                                                 })}
+
                                             </Box>
                                         </Box>
                                     );
