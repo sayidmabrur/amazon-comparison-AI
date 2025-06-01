@@ -16,6 +16,7 @@ type ProductTableProps = {
     RecommendedIndex: number;
     recommendedIndexLarge: number;
     productLinks: any[];
+    ASIN: any[];
 }
 
 interface RecommendedAttribute {
@@ -24,7 +25,7 @@ interface RecommendedAttribute {
     rating: string;
 }
 
-export default function ProductTable({ products, AIConclusion, AIConclusionLarge, AIRecommendation, AIRecommendationLarge, RecommendedIndex, recommendedIndexLarge, productLinks }: ProductTableProps) {
+export default function ProductTable({ products, AIConclusion, AIConclusionLarge, AIRecommendation, AIRecommendationLarge, RecommendedIndex, recommendedIndexLarge, productLinks, ASIN }: ProductTableProps) {
     const [showSummary, setShowSummary] = useState(false);
     const [useLarge, setUseLarge] = useState(false);  // New toggle state for large/small
     const [copied, setCopied] = useState(false);
@@ -127,7 +128,7 @@ export default function ProductTable({ products, AIConclusion, AIConclusionLarge
                         exit={{ opacity: 0, x: 30 }}
                         transition={{ duration: 0.3 }}
                     >
-                        <ProductComparisonTable products={products} />
+                        <ProductComparisonTable products={products} ASIN={ASIN}/>
                     </motion.div>
                 )}
             </AnimatePresence>

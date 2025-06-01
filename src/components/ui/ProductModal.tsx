@@ -14,6 +14,7 @@ interface ProductModalProps {
 export default function ProductModal({ isOpen, onClose, onCompare }: ProductModalProps) {
   const [inputs, setInputs] = useState<string[]>(['', ''])
   const router = useRouter()
+  const [warning, setWarning] = useState<string | null>(null)
 
   const handleInputChange = (index: number, value: string) => {
     const updated = [...inputs]
@@ -22,6 +23,11 @@ export default function ProductModal({ isOpen, onClose, onCompare }: ProductModa
   }
 
   const handleAddInput = () => {
+    if (inputs.length >= 10) {
+      setWarning('You can only add up to 10 products.')
+      return
+    }
+    setWarning(null) // clear warning if under limit
     setInputs(prev => [...prev, ''])
   }
 
@@ -52,7 +58,8 @@ export default function ProductModal({ isOpen, onClose, onCompare }: ProductModa
 
         <h3 className="text-lg font-semibold mb-4">Add Product Link</h3>
 
-        <div className="space-y-3">
+
+        <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
           {inputs.map((link, index) => (
             <LinkInput
               key={index}
@@ -63,6 +70,10 @@ export default function ProductModal({ isOpen, onClose, onCompare }: ProductModa
             />
           ))}
         </div>
+
+        {warning && (
+          <p className="text-sm text-red-500 mt-2">{warning}</p>
+        )}
 
         <div className="mt-6 flex justify-between">
           <SubmitButton

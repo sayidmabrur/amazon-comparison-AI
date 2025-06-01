@@ -13,9 +13,11 @@ type RawProductData = {
 
 type ProductComparisonTableProps = {
     products: RawProductData;
+    ASIN: any[];  // or a more specific type if you know it
+
 };
 
-export default function ProductComparisonTable({ products }: ProductComparisonTableProps) {
+export default function ProductComparisonTable({ products, ASIN }: ProductComparisonTableProps) {
     const transformedProducts = transformProductData(products);
     const aspectLabels = products.map(p => p.aspect);
     const starLabels = {
@@ -26,14 +28,20 @@ export default function ProductComparisonTable({ products }: ProductComparisonTa
         one_star: '1 ★',
     };
 
-    const Row = ({ label, render }: { label: string, render: (product: Record<string, any>) => JSX.Element }) => (
+    const Row = ({
+        label,
+        render,
+    }: {
+        label: string;
+        render: (product: Record<string, any>, index: number) => JSX.Element;
+    }) => (
         <div className="grid grid-cols-[180px_1fr] gap-4 py-4 text-sm border-t border-gray-100 first:border-t-0">
             <div className="text-black font-semibold text-base">{label}</div>
             <div className="overflow-x-auto">
                 <div className="flex space-x-8 min-w-max">
                     {transformedProducts.map((product, index) => (
                         <div key={index} className="w-64 flex-shrink-0">
-                            {render(product)}
+                            {render(product, index)}
                         </div>
                     ))}
                 </div>
@@ -64,7 +72,12 @@ export default function ProductComparisonTable({ products }: ProductComparisonTa
                     )}
                 />
 
-
+                <Row
+                    label="ASIN"
+                    render={(_, index) => (
+                        <span className="text-gray-800 font-mono text-sm"><strong>{ASIN[index]}</strong></span>
+                    )}
+                />
                 {aspectLabels.filter(label => label !== "Product").map((aspect) => {
                     const type = products.find(p => p.aspect === aspect)?.type;
                     return (
@@ -147,6 +160,96 @@ export default function ProductComparisonTable({ products }: ProductComparisonTa
                                     );
                                 }
                                 else if (type === 'review') {
+                                    if (aspect === 'Youtube Review') {
+                                        return (
+                                            <Box
+                                                sx={{
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    borderRadius: 3,
+                                                    boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.05)',
+                                                    overflow: 'hidden',
+                                                    backgroundColor: '#fff',
+                                                    border: '1px solid #e0e0e0',
+                                                    transition: 'box-shadow 0.3s',
+                                                    '&:hover': {
+                                                        boxShadow: '0px 6px 30px rgba(0, 0, 0, 0.1)',
+                                                    },
+                                                }}
+                                            >
+                                                {/* Thumbnail with badge */}
+                                                <Box sx={{ position: 'relative' }}>
+                                                    <img
+                                                        src={value.thumbnail_url}
+                                                        alt="YouTube Thumbnail"
+                                                        style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                                                    />
+                                                    <Box
+                                                        sx={{
+                                                            position: 'absolute',
+                                                            bottom: 8,
+                                                            left: 8,
+                                                            backgroundColor: '#FF0000',
+                                                            color: '#fff',
+                                                            fontSize: '12px',
+                                                            fontWeight: 'bold',
+                                                            px: 1.5,
+                                                            py: 0.5,
+                                                            borderRadius: '12px',
+                                                            textTransform: 'uppercase',
+                                                            letterSpacing: 0.5,
+                                                        }}
+                                                    >
+                                                        <a
+                                                            href={value.link}
+                                                            target="_blank"
+                                                        >
+                                                            Click to Watch!
+                                                        </a>
+                                                    </Box>
+                                                </Box>
+
+                                                {/* Review body */}
+                                                <Box sx={{ px: 3, py: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                                                    {/* Positive */}
+                                                    <Box>
+                                                        <Typography variant="subtitle2" fontWeight={700} color="#0F9D58" gutterBottom>
+                                                            Positive Highlights
+                                                        </Typography>
+                                                        <Box display="flex" alignItems="center" gap={1} mb={0.5}>
+                                                            <Rating value={value.positive_rating} readOnly size="small" precision={0.5} />
+                                                            <Typography variant="body2" fontWeight={500}>
+                                                                {value.positive_rating} / 5
+                                                            </Typography>
+                                                        </Box>
+                                                        <Typography variant="body2" color="text.secondary">
+                                                            “{value.positive_review}”
+                                                        </Typography>
+                                                    </Box>
+
+                                                    {/* Divider */}
+                                                    <Box sx={{ height: 1, backgroundColor: '#eee', my: 1 }} />
+
+                                                    {/* Negative */}
+                                                    <Box>
+                                                        <Typography variant="subtitle2" fontWeight={700} color="#DB4437" gutterBottom>
+                                                            Negative Notes
+                                                        </Typography>
+                                                        <Box display="flex" alignItems="center" gap={1} mb={0.5}>
+                                                            <Rating value={value.negative_rating} readOnly size="small" precision={0.5} />
+                                                            <Typography variant="body2" fontWeight={500}>
+                                                                {value.negative_rating} / 5
+                                                            </Typography>
+                                                        </Box>
+                                                        <Typography variant="body2" color="text.secondary">
+                                                            “{value.negative_review}”
+                                                        </Typography>
+                                                    </Box>
+                                                </Box>
+                                            </Box>
+                                        );
+                                    }
+
                                     return (
                                         <Box display="flex" flexDirection="column" gap={2}>
                                             {/* Positive Review */}
@@ -171,7 +274,7 @@ export default function ProductComparisonTable({ products }: ProductComparisonTa
                                                 <Typography variant="subtitle2" fontWeight={600} color="text.primary" mb={0.5}>
                                                     Positive
                                                 </Typography>
-                                                <Typography variant="body2" color="text.secondary" fontStyle="italic">
+                                                <Typography variant="body2" color="text.secondary">
                                                     “{value.positive_review}”
                                                 </Typography>
                                             </Box>
@@ -198,7 +301,7 @@ export default function ProductComparisonTable({ products }: ProductComparisonTa
                                                 <Typography variant="subtitle2" fontWeight={600} color="text.primary" mb={0.5}>
                                                     Negative
                                                 </Typography>
-                                                <Typography variant="body2" color="text.secondary" fontStyle="italic">
+                                                <Typography variant="body2" color="text.secondary">
                                                     “{value.negative_review}”
                                                 </Typography>
                                             </Box>
