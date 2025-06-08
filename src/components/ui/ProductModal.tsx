@@ -23,8 +23,8 @@ export default function ProductModal({ isOpen, onClose, onCompare }: ProductModa
   }
 
   const handleAddInput = () => {
-    if (inputs.length >= 10) {
-      setWarning('You can only add up to 10 products.')
+    if (inputs.length >= 5) {
+      setWarning('You can only add up to 5 products.')
       return
     }
     setWarning(null) // clear warning if under limit
