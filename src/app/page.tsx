@@ -116,8 +116,8 @@ export default function HomePage() {
 
         <div className="w-full py-0 flex">
           {/* <ProductSlider /> */}
-          {/* <HeroSlider /> */}
-          <img src="/assets/review_1.gif" alt="" />
+          <HeroSlider />
+          {/* <img src="/assets/review_1.gif" alt="" /> */}
 
         </div>
       </div>

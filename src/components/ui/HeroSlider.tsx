@@ -1,45 +1,56 @@
 'use client';
 
-import React, { useState } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import React, { useEffect, useRef } from 'react';
+import Glide from '@glidejs/glide';
+import '@glidejs/glide/dist/css/glide.core.min.css';
+import '@glidejs/glide/dist/css/glide.theme.min.css';
 
 const gifSlides = [
     { src: '/assets/review_1.gif', alt: 'Slide 1', caption: 'No Image' },
-    { src: '/assets/review_1.gif', alt: 'Slide 2', caption: 'No Video' },
-    { src: '/assets/review_1.gif', alt: 'Slide 3', caption: 'Empty' },
+    { src: '/assets/review_2.gif', alt: 'Slide 2', caption: 'No Image' },
+    // { src: '/assets/review_1.gif', alt: 'Slide 3', caption: 'Empty' },
 ];
 
 export default function HeroSlider() {
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 800,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        pauseOnHover: true,
-        arrows: true,
-        adaptiveHeight: false,
-    };
+    const glideRef = useRef<HTMLDivElement | null>(null);
 
+    useEffect(() => {
+        if (glideRef.current) {
+            const glide = new Glide(glideRef.current, {
+                type: 'carousel',
+                autoplay: 5000,
+                animationDuration: 800,
+                hoverpause: true,
+                perView: 1,
+            });
+
+            glide.mount();
+
+            return () => glide.destroy();
+        }
+    }, []);
 
     return (
-        <div className="relative h-screen w-full">
-            <Slider {...settings}>
-                {gifSlides.map((slide, idx) => (
-                    <div key={idx} className="relative h-screen w-full">
-                        <img src={slide.src} alt={slide.alt} className="object-cover w-full h-screen" />
-                        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center z-10">
-                            <h2 className="text-white text-4xl md:text-6xl font-bold shadow-lg">
-                                {slide.caption}
-                            </h2>
-                        </div>
-                    </div>
-                ))}
-            </Slider>
+        <div ref={glideRef} className="glide relative w-full">
+            <div className="glide__track" data-glide-el="track">
+                <ul className="glide__slides">
+                    {gifSlides.map((slide, idx) => (
+                        <li key={idx} className="glide__slide relative w-full">
+                            <img
+                                src={slide.src}
+                                alt={slide.alt}
+                                className="object-cover w-full min-h-[50vh] rounded-xl"
+                            />
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            {/* Navigation */}
+            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2" data-glide-el="controls">
+                <button data-glide-dir="<" className="text-white mx-2 text-2xl">‹</button>
+                <button data-glide-dir=">" className="text-white mx-2 text-2xl">›</button>
+            </div>
         </div>
     );
 }
