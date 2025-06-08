@@ -26,8 +26,12 @@ export default function HeroSlider() {
 
             glide.mount();
 
-            return () => glide.destroy();
+            return () => {
+                glide.destroy(); // explicitly call it, ignore return value
+            };
         }
+
+        return; // ensure the effect always returns `void` or a function
     }, []);
 
     return (
