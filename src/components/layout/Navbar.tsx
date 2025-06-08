@@ -51,9 +51,12 @@ const Navbar = () => {
                 <Link href="/" className="text-[var(--light-h1-text)] dark:text-[var(--dark-h1-text)] hover:underline">
                     Home
                 </Link>
-                <Link href="/history" className="text-[var(--light-h1-text)] dark:text-[var(--dark-h1-text)] hover:underline">
-                    Top Comparison
+                <Link href="/home-old" className="text-[var(--light-h1-text)] dark:text-[var(--dark-h1-text)] hover:underline">
+                    Older Version
                 </Link>
+                {/* <Link href="/history" className="text-[var(--light-h1-text)] dark:text-[var(--dark-h1-text)] hover:underline">
+                    Top Comparison
+                </Link> */}
                 {/* <Link href="/#" className="text-[var(--light-h1-text)] dark:text-[var(--dark-h1-text)] hover:underline">
                     Our Company
                 </Link> */}

@@ -216,12 +216,12 @@ export default function ProductComparisonTable({ products, ASIN }: ProductCompar
                                                         <Typography variant="subtitle2" fontWeight={700} color="#0F9D58" gutterBottom>
                                                             Positive Highlights
                                                         </Typography>
-                                                        <Box display="flex" alignItems="center" gap={1} mb={0.5}>
+                                                        {/* <Box display="flex" alignItems="center" gap={1} mb={0.5}>
                                                             <Rating value={value.positive_rating} readOnly size="small" precision={0.5} />
                                                             <Typography variant="body2" fontWeight={500}>
                                                                 {value.positive_rating} / 5
                                                             </Typography>
-                                                        </Box>
+                                                        </Box> */}
                                                         <Typography variant="body2" color="text.secondary">
                                                             “{value.positive_review}”
                                                         </Typography>
@@ -235,12 +235,12 @@ export default function ProductComparisonTable({ products, ASIN }: ProductCompar
                                                         <Typography variant="subtitle2" fontWeight={700} color="#DB4437" gutterBottom>
                                                             Negative Notes
                                                         </Typography>
-                                                        <Box display="flex" alignItems="center" gap={1} mb={0.5}>
+                                                        {/* <Box display="flex" alignItems="center" gap={1} mb={0.5}>
                                                             <Rating value={value.negative_rating} readOnly size="small" precision={0.5} />
                                                             <Typography variant="body2" fontWeight={500}>
                                                                 {value.negative_rating} / 5
                                                             </Typography>
-                                                        </Box>
+                                                        </Box> */}
                                                         <Typography variant="body2" color="text.secondary">
                                                             “{value.negative_review}”
                                                         </Typography>

@@ -301,4 +301,82 @@
     background-color: #929292 !important;
     /* gray in dark mode */
   }
+
+  /* Style the entire intro.js tooltip box */
+  .introjs-tooltip {
+    border: none !important;
+    /* Remove border */
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem !important;
+    color: var(--text);
+    background-color: var(--card);
+    padding: 20px !important;
+    max-width: 320px !important;
+  }
+
+  /* Style the buttons container */
+  .introjs-tooltipbuttons {
+    border: none;
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  /* Common button styles */
+  .introjs-button {
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    padding: 8px 18px !important;
+    font-size: 0.9rem !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.25s ease;
+    box-shadow: none !important;
+    user-select: none;
+    min-width: 70px;
+  }
+
+  /* Skip button styling */
+  .introjs-skipbutton {
+    background-color: transparent !important;
+    color: var(--custom-subtext) !important;
+    border: 2px solid var(--custom-subtext) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    font-size: 0.9rem !important;
+    padding: 8px 18px !important;
+    border-radius: 12px !important;
+    /* Smooth rounded corners */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+    /* subtle shadow */
+    cursor: pointer !important;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease !important;
+    user-select: none;
+    min-width: 80px;
+  }
+
+
+  .introjs-skipbutton:hover {
+    background-color: var(--custom-subtext) !important;
+    color: var(--card) !important;
+    border-color: var(--custom-subtext) !important;
+  }
+
+  /* Done button styling */
+  .introjs-donebutton {
+    background-color: var(--custom-compare-button) !important;
+    color: var(--custom-compare-button-text) !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 8px rgba(246, 108, 82, 0.4) !important;
+  }
+
+  .introjs-donebutton:hover {
+    filter: brightness(0.9);
+  }
+
 }

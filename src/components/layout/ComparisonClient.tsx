@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 import LoadingScreen from '@/components/layout/LoadingScreen';
-import ProductTable from '@/components/layout/ProductTable'; // your new ProductTable component
+import ProductTable from '@/components/layout/ProductTable';
 import Footer from '@/components/layout/Footer';
 import { motion } from 'framer-motion';
 
@@ -19,27 +19,42 @@ export default function ComparisonClient() {
     const [RecommendedIndexLarge, setRecommendedIndexLarge] = useState(0);
     const [ProductLinks, setProductLinks] = useState([]);
     const [asin, setASIN] = useState([]);
+    const [comparison_id, setComparisonId] = useState("");
+
     const searchParams = useSearchParams();
+    const pathname = usePathname();
 
     useEffect(() => {
         const rawLinks = searchParams.get('links');
-        if (!rawLinks) return;
+        const compId = searchParams.get('comparison_id');
         const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
         const fetchData = async () => {
             try {
-                const decoded = decodeURIComponent(rawLinks);
-                const parsedLinks = JSON.parse(decoded);
+                let payload: any = {
+                    dummy: false,
+                    base_openai_model: "gpt-4.1-nano",
+                };
 
-                const response = await fetch('https://amazon-product-compare-1056582462205.asia-southeast1.run.app/compare', {
+                if (compId) {
+                    payload.comparison_id = compId;
+                } else if (rawLinks) {
+                    const decoded = decodeURIComponent(rawLinks);
+                    const parsedLinks = JSON.parse(decoded);
+                    payload.links = parsedLinks;
+                } else {
+                    console.warn("No links or comparison_id provided in URL");
+                    return;
+                }
+
+                const endpoint = pathname === '/comparison-old'
+                    ? 'https://amazon-product-compare-1056582462205.asia-southeast1.run.app/compare'
+                    : 'https://amazon-product-compare-1056582462205.asia-southeast1.run.app/compare/v2';
+
+                const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        links: parsedLinks,
-                        dummy: false,
-                        base_openai_model: "gpt-4.1-nano",
-                        // large_openai_model: "gpt-4.1"
-                    }),
+                    body: JSON.stringify(payload),
                 });
 
                 if (response.ok) {
@@ -53,6 +68,8 @@ export default function ComparisonClient() {
                     setRecommendedIndexLarge(data.data.index_recommendation_large || 0);
                     setProductLinks(data.data.links || []);
                     setASIN(data.data.ASIN || []);
+                    setComparisonId(data.data.comparison_id || "");
+                    console.log("COMPARISON_ID:", data.data.comparison_id);
                 } else {
                     console.error('API error:', response.statusText);
                 }
@@ -65,12 +82,12 @@ export default function ComparisonClient() {
         };
 
         fetchData();
-    }, [searchParams]);
+    }, [searchParams, pathname]);
 
     if (loading) {
         return <LoadingScreen text="Letting our smartest algorithms do the heavy lifting — your perfect pick is on the way!" />;
     }
-    console.log("buynow:", ProductLinks)
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -91,6 +108,7 @@ export default function ComparisonClient() {
                     recommendedIndexLarge={RecommendedIndexLarge}
                     productLinks={ProductLinks}
                     ASIN={asin}
+                    comparison_id={comparison_id}
                 />
             </main>
             <Footer />

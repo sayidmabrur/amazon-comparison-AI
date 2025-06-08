@@ -17,6 +17,7 @@ type ProductTableProps = {
     recommendedIndexLarge: number;
     productLinks: any[];
     ASIN: any[];
+    comparison_id: string;
 }
 
 interface RecommendedAttribute {
@@ -25,7 +26,7 @@ interface RecommendedAttribute {
     rating: string;
 }
 
-export default function ProductTable({ products, AIConclusion, AIConclusionLarge, AIRecommendation, AIRecommendationLarge, RecommendedIndex, recommendedIndexLarge, productLinks, ASIN }: ProductTableProps) {
+export default function ProductTable({ products, AIConclusion, AIConclusionLarge, AIRecommendation, AIRecommendationLarge, RecommendedIndex, recommendedIndexLarge, productLinks, ASIN, comparison_id }: ProductTableProps) {
     const [showSummary, setShowSummary] = useState(false);
     const [useLarge, setUseLarge] = useState(false);  // New toggle state for large/small
     const [copied, setCopied] = useState(false);
@@ -52,9 +53,9 @@ export default function ProductTable({ products, AIConclusion, AIConclusionLarge
             rating: rating ?? "N/A"
         };
     };
-
     const handleCopy = () => {
-        navigator.clipboard.writeText(window.location.href);
+        const url = `${window.location.origin}/comparison?comparison_id=${comparison_id}`;
+        navigator.clipboard.writeText(url);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -128,7 +129,7 @@ export default function ProductTable({ products, AIConclusion, AIConclusionLarge
                         exit={{ opacity: 0, x: 30 }}
                         transition={{ duration: 0.3 }}
                     >
-                        <ProductComparisonTable products={products} ASIN={ASIN}/>
+                        <ProductComparisonTable products={products} ASIN={ASIN} />
                     </motion.div>
                 )}
             </AnimatePresence>
